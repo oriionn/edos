@@ -1,7 +1,17 @@
 #include <stdio.h>
+#include "linux.h"
 
 int main() {
-    printf("Hello World !\n");
+    struct HardMemory ram;
+    struct SwapMemory swap;
 
-    return (0);
+    if (getMemory(&ram, &swap) != 0) {
+        fprintf(stderr, "Unable to retrieve memory information\n");
+        return 1;
+    }
+
+    printf("Memory : %lu / %lu\n", ram.free, ram.total);
+    printf("Swap : %lu / %lu\n", swap.free, swap.total);
+
+    return 0;
 }
