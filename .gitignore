@@ -1,2 +1,37 @@
 server/server
 server/c_backup
+
+# dependencies (bun install)
+client/node_modules
+
+# output
+client/out
+client/dist
+client/*.tgz
+
+# code coverage
+client/coverage
+client/*.lcov
+
+# logs
+client/logs
+client/_.log
+client/report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
+
+# dotenv environment variable files
+client/.env
+client/.env.development.local
+client/.env.test.local
+client/.env.production.local
+client/.env.local
+
+# caches
+client/.eslintcache
+client/.cache
+client/*.tsbuildinfo
+
+# IntelliJ based IDEs
+client/.idea
+
+# Finder (MacOS) folder config
+client/.DS_Store
