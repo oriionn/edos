@@ -51,3 +51,12 @@ func GetDisks() ([]models.Disk, error) {
 		return nil, errors.New("Unknown OS")
 	}
 }
+
+func GetUptime() (uint64, error) {
+	switch runtime.GOOS {
+	case "linux":
+		return linux.GetUptime()
+	default:
+		return 0, errors.New("Unknown OS")
+	}
+}

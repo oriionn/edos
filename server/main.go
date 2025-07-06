@@ -3,6 +3,7 @@ package main
 import (
 	"edos/server/models"
 	"edos/server/systems"
+	"edos/server/systems/linux"
 	"fmt"
 	"strconv"
 	"time"
@@ -15,12 +16,23 @@ func main() {
 	var old models.CPUStats
 	var new models.CPUStats
 
+	var oldNetwork models.NetworkStats
+	var newNetwork models.NetworkStats
+
 	systems.GetMemory(&hard, &swap)
 	systems.ReadCPU(&old)
+	linux.ReadNetworkStats(&oldNetwork)
 
 	fmt.Printf("Memory : %d / %d\n", hard.Total-hard.Free, hard.Total)
 	fmt.Printf("Swap : %d / %d\n", swap.Total-swap.Free, swap.Total)
 	fmt.Printf("CPU Name : %s\n", systems.GetCPUName())
+
+	uptime, err := systems.GetUptime()
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Printf("Uptime : %d\n", uptime)
+	}
 
 	disks, err := systems.GetDisks()
 
@@ -42,8 +54,13 @@ func main() {
 		fmt.Printf("\n")
 	}
 
-	time.Sleep(5 * time.Second)
+	time.Sleep(1 * time.Second)
 	systems.ReadCPU(&new)
+	linux.ReadNetworkStats(&newNetwork)
 
-	fmt.Printf("CPU Usage : %.2f%s \n", systems.GetCPUUsage(old, new), "%")
+	network := linux.GetNetworkStats(&oldNetwork, &newNetwork)
+	fmt.Printf("Upload in 1 sec   : %d bytes\n", network.Upload)
+	fmt.Printf("Download in 1 sec : %d bytes\n", network.Download)
+
+	fmt.Printf("CPU Usage         : %.2f%s \n", systems.GetCPUUsage(old, new), "%")
 }
