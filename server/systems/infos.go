@@ -32,3 +32,12 @@ func GetCPUUsage(old models.CPUStats, new models.CPUStats) float32 {
 		return 10000000.0
 	}
 }
+
+func GetCPUName() string {
+	switch runtime.GOOS {
+	case "linux":
+		return linux.GetCPUName()
+	default:
+		return ""
+	}
+}

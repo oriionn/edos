@@ -1,6 +1,7 @@
 package linux
 
 import (
+	"bufio"
 	"edos/server/models"
 	"fmt"
 	"os"
@@ -8,14 +9,13 @@ import (
 )
 
 func ReadCPU(stats *models.CPUStats) uint8 {
-	file, err := os.ReadFile("/proc/stat")
-	reader := strings.NewReader(string(file))
+	file, err := os.Open("/proc/stat")
 
 	if err != nil {
 		return 1
 	}
 
-	_, err = fmt.Fscanf(reader, "cpu  %d %d %d %d %d %d %d %d %d %d",
+	_, err = fmt.Fscanf(file, "cpu  %d %d %d %d %d %d %d %d %d %d",
 		&stats.User, &stats.Nice, &stats.System, &stats.Idle,
 		&stats.Iowait, &stats.Irq, &stats.Softirq, &stats.Steal,
 		&stats.Guest, &stats.GuestNice)
@@ -42,4 +42,28 @@ func GetCPUUsage(old models.CPUStats, new models.CPUStats) float32 {
 	)
 
 	return (float32(totald-idled) / float32(totald)) * 100
+}
+
+func GetCPUName() string {
+	file, err := os.Open("/proc/cpuinfo")
+
+	if err != nil {
+		return ""
+	}
+
+	defer file.Close()
+
+	// var name string
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		line := scanner.Text()
+		if strings.HasPrefix(line, "model name") {
+			splitted := strings.Split(line, ":")
+			if len(splitted) > 1 {
+				return strings.Trim(splitted[1], " ")
+			}
+		}
+	}
+
+	return ""
 }
