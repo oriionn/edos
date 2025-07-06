@@ -3,6 +3,7 @@ package systems
 import (
 	"edos/server/models"
 	"edos/server/systems/linux"
+	"errors"
 	"runtime"
 )
 
@@ -39,5 +40,14 @@ func GetCPUName() string {
 		return linux.GetCPUName()
 	default:
 		return ""
+	}
+}
+
+func GetDisks() ([]models.Disk, error) {
+	switch runtime.GOOS {
+	case "linux":
+		return linux.GetDisks()
+	default:
+		return nil, errors.New("Unknown OS")
 	}
 }

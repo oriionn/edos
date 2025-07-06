@@ -3,7 +3,6 @@ package main
 import (
 	"edos/server/models"
 	"edos/server/systems"
-	"edos/server/systems/linux"
 	"fmt"
 	"strconv"
 	"time"
@@ -23,7 +22,7 @@ func main() {
 	fmt.Printf("Swap : %d / %d\n", swap.Total-swap.Free, swap.Total)
 	fmt.Printf("CPU Name : %s\n", systems.GetCPUName())
 
-	disks, err := linux.GetDisks()
+	disks, err := systems.GetDisks()
 
 	if err != nil {
 		fmt.Println(err)
