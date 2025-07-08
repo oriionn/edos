@@ -1,12 +1,24 @@
 {
-  "name": "client",
-  "module": "index.ts",
-  "type": "module",
-  "private": true,
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
-  }
+    "name": "client",
+    "module": "src/index.ts",
+    "type": "module",
+    "scripts": {
+        "start": "bun run .",
+        "dev": "bun run --watch ."
+    },
+    "devDependencies": {
+        "@inquirer/prompts": "^7.6.0",
+        "@types/bun": "^1.2.18",
+        "better-sqlite3": "^12.2.0",
+        "drizzle-kit": "^0.31.4"
+    },
+    "peerDependencies": {
+        "typescript": "^5"
+    },
+    "dependencies": {
+        "@logtape/file": "^1.0.4",
+        "@logtape/logtape": "^1.0.4",
+        "@logtape/pretty": "^1.0.4",
+        "drizzle-orm": "^0.44.2"
+    }
 }
