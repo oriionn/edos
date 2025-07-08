@@ -73,6 +73,8 @@ func getDisk(device string, disk *models.Disk) uint8 {
 		return 1
 	}
 
+	disk.TotalSize *= 512
+
 	mountpoint := GetMountpoint(device)
 	if mountpoint == "" {
 		disk.Name = device
