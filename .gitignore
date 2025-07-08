@@ -35,3 +35,6 @@ client/.idea
 
 # Finder (MacOS) folder config
 client/.DS_Store
+
+client/edos.log
+client/client.sqlite

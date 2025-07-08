@@ -13,22 +13,21 @@ export async function cpuname(socket: Socket<SocketData>, data: Message) {
     let names = await db
         .select()
         .from(tables.cpu_names)
-        .where(eq(tables.cpu_names.id, data.Id))
+        .where(eq(tables.cpu_names.server_id, data.Id))
         .limit(1);
 
     if (names.length === 0) {
         await db
             .insert(tables.cpu_names)
-            .values({ id: data.Id, name: data.Data as string });
+            .values({ server_id: data.Id, name: data.Data as string });
     } else {
         await db
             .update(tables.cpu_names)
             .set({ name: data.Data as string })
-            .where(eq(tables.cpu_names.id, data.Id));
+            .where(eq(tables.cpu_names.server_id, data.Id));
     }
 
     let serverName = await getServerName(data.Id);
-
     logger.info("Server {server} sent the name of its CPU", {
         server: serverName,
     });

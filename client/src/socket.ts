@@ -1,7 +1,13 @@
+import { cpu_usage } from "./database/schema";
 import { DataType, type Message } from "./models/message";
 import { cpuname } from "./socket/cpuname";
+import { cpuusage } from "./socket/cpuusage";
+import { disk } from "./socket/disk";
 import { init } from "./socket/init";
+import { network } from "./socket/network";
+import { uptime } from "./socket/uptime";
 import { Logger } from "./utils/log";
+import { getServerName } from "./utils/server";
 
 export type SocketData = { auth: boolean; id: number | null };
 const logger = Logger.get("tcp socket");
@@ -23,6 +29,9 @@ export async function startSocket() {
                     return socket.write(`false`);
                 }
 
+                let serverName = await getServerName(decoded.Id);
+                if (serverName === null) return socket.write("false");
+
                 if (decoded.Type !== DataType.INIT) {
                     // @ts-ignore
                     if (!socket.auth) return socket.write("false");
@@ -34,6 +43,18 @@ export async function startSocket() {
                         break;
                     case DataType.CPU_NAME:
                         cpuname(socket, decoded);
+                        break;
+                    case DataType.CPU_USAGE:
+                        cpuusage(socket, decoded);
+                        break;
+                    case DataType.DISK:
+                        disk(socket, decoded);
+                        break;
+                    case DataType.UPTIME:
+                        uptime(socket, decoded);
+                        break;
+                    case DataType.NETWORKS:
+                        network(socket, decoded);
                         break;
                     default:
                         return socket.write("false");

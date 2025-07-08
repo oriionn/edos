@@ -1,0 +1,1 @@
+ALTER TABLE `uptime` ADD `date` integer DEFAULT (unixepoch()) NOT NULL;

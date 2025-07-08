@@ -1,0 +1,1 @@
+ALTER TABLE `uptime` DROP COLUMN `date`;

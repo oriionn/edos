@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX `servers_id_unique` ON `servers` (`id`);
