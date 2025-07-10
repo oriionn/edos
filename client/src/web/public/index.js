@@ -1,0 +1,81 @@
+const servers = document.getElementById("servers");
+
+async function load() {
+    let token = localStorage.getItem("token");
+    if (token === undefined) {
+        window.location.href = "/login";
+        return;
+    }
+
+    let res = await fetch(`/api/auth/validity`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+
+    try {
+        let data = await res.json();
+        if (!data.ok) {
+            throw new Error(data.code);
+        }
+    } catch (e) {
+        window.location.href = "/login";
+        return;
+    }
+
+    res = await fetch(`/api/servers`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+
+    if (res.status !== 200) {
+        window.location.href = "/login";
+        return;
+    }
+
+    data = await res.json();
+
+    data.data.servers.forEach((server) => {
+        servers.innerHTML =
+            `<div class="server">
+            <a href="/server/${server.id}">${server.name}</a>
+            <div class="actions">
+                <div class="token">
+                    <svg
+                        viewBox="0 0 888 888"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path d="M0 751H205V888H0V751Z" fill="white" />
+                        <path d="M69 683H342V751H69V683Z" fill="white" />
+                        <path d="M137 615H410V683H137V615Z" fill="white" />
+                        <path d="M205 547H478V615H205V547Z" fill="white" />
+                        <path d="M273 479H751V547H273V479Z" fill="white" />
+                        <path d="M341 411H819V479H341V411Z" fill="white" />
+                        <path d="M342 205H888V411H342V205Z" fill="white" />
+                        <path d="M342 137H615V205H342V137Z" fill="white" />
+                        <path d="M410 69H819V137H410V69Z" fill="white" />
+                        <path d="M751 137H888V205H751V137Z" fill="white" />
+                        <path d="M478 0H751V69H478V0Z" fill="white" />
+                        <path d="M273 751H205V819H273V751Z" fill="white" />
+                    </svg>
+                </div>
+
+                <svg
+                    viewBox="0 0 470 474"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="status"
+                >
+                    <path d="M90 108H379V474H90V108Z" />
+                    <path d="M0 380V93H108V380H0Z" />
+                    <path d="M362 380V93H470V380H362Z" />
+                    <path d="M379 108H92V0L379 0V108Z" />
+                </svg>
+            </div>
+        </div>` + servers.innerHTML;
+    });
+}
+
+load();
