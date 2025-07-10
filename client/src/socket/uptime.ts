@@ -28,7 +28,7 @@ export async function uptime(socket: Socket<SocketData>, data: Message) {
             .where(eq(tables.uptime.server_id, data.Id));
     }
 
-    logger.info("Server {server} sent its uptime", {
+    logger.debug("Server {server} sent its uptime", {
         server: await getServerName(data.Id),
     });
 

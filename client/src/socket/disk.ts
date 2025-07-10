@@ -47,7 +47,7 @@ export async function disk(socket: Socket<SocketData>, data: Message) {
             );
     }
 
-    logger.info("Server {server} sent infos its disk ({device})", {
+    logger.debug("Server {server} sent infos its disk ({device})", {
         server: await getServerName(data.Id),
         device: disk.Device,
     });

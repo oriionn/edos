@@ -8,24 +8,24 @@ import { getServerName } from "../utils/server";
 
 const logger = Logger.get("tcp socket");
 
-export async function network(socket: Socket<SocketData>, data: Message) {
+export async function memory(socket: Socket<SocketData>, data: Message) {
     let splitted = (data.Data as string).split(";");
     if (splitted.length !== 4) return socket.write("false");
 
-    let [download_sec, upload_sec, download_all, upload_all] = splitted.map(
-        (s) => parseInt(s),
+    let [total_hard, free_hard, total_swap, free_swap] = splitted.map((s) =>
+        parseInt(s),
     );
 
-    await db.insert(tables.network).values({
+    await db.insert(tables.memory).values({
         // @ts-ignore
         server_id: data.Id,
-        upload_sec,
-        download_sec,
-        upload_all,
-        download_all,
+        total_hard,
+        free_hard,
+        total_swap,
+        free_swap,
     });
 
-    logger.debug("Server {server} sent its network's stats", {
+    logger.debug("Server {server} sent its memory stats", {
         server: await getServerName(data.Id),
     });
 

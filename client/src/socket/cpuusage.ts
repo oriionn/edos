@@ -15,7 +15,7 @@ export async function cpuusage(socket: Socket<SocketData>, data: Message) {
     });
 
     let serverName = await getServerName(data.Id);
-    logger.info("Server {server} sent the usage of its CPU", {
+    logger.debug("Server {server} sent the usage of its CPU", {
         server: serverName,
     });
 

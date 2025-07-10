@@ -4,6 +4,7 @@ import { cpuname } from "./socket/cpuname";
 import { cpuusage } from "./socket/cpuusage";
 import { disk } from "./socket/disk";
 import { init } from "./socket/init";
+import { memory } from "./socket/memory";
 import { network } from "./socket/network";
 import { uptime } from "./socket/uptime";
 import { Logger } from "./utils/log";
@@ -55,6 +56,9 @@ export async function startSocket() {
                         break;
                     case DataType.NETWORKS:
                         network(socket, decoded);
+                        break;
+                    case DataType.MEMORY:
+                        memory(socket, decoded);
                         break;
                     default:
                         return socket.write("false");

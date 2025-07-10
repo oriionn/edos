@@ -78,6 +78,13 @@
       "when": 1752014682643,
       "tag": "0010_minor_sir_ram",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "6",
+      "when": 1752019794430,
+      "tag": "0011_pale_abomination",
+      "breakpoints": true
     }
   ]
 }

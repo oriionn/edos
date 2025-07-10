@@ -28,7 +28,7 @@ export async function cpuname(socket: Socket<SocketData>, data: Message) {
     }
 
     let serverName = await getServerName(data.Id);
-    logger.info("Server {server} sent the name of its CPU", {
+    logger.debug("Server {server} sent the name of its CPU", {
         server: serverName,
     });
 
