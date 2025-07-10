@@ -21,6 +21,10 @@ export const Logger = {
                     sinks: ["console", "file"],
                 },
                 {
+                    category: "web server",
+                    sinks: ["console", "file"],
+                },
+                {
                     category: ["logtape", "meta"],
                     sinks: [],
                 },

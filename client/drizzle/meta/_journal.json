@@ -85,6 +85,13 @@
       "when": 1752019794430,
       "tag": "0011_pale_abomination",
       "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "6",
+      "when": 1752107389533,
+      "tag": "0012_steady_king_cobra",
+      "breakpoints": true
     }
   ]
 }

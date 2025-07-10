@@ -19,6 +19,7 @@
         "@logtape/file": "^1.0.4",
         "@logtape/logtape": "^1.0.4",
         "@logtape/pretty": "^1.0.4",
-        "drizzle-orm": "^0.44.2"
+        "drizzle-orm": "^0.44.2",
+        "elysia": "^1.3.5"
     }
 }
