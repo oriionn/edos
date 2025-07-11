@@ -7,6 +7,7 @@ import (
 	"edos/server/systems"
 	"fmt"
 	"net"
+	"sync"
 	"time"
 )
 
@@ -19,6 +20,7 @@ func mainLoop(conn net.Conn, id int) error {
 		network models.Network
 		hard    models.HardMemory
 		swap    models.SwapMemory
+		mu      sync.Mutex
 	)
 
 	CPUName := systems.GetCPUName()
@@ -31,9 +33,9 @@ func mainLoop(conn net.Conn, id int) error {
 	go func() {
 		ticker := time.NewTicker(1*time.Minute + 500*time.Millisecond)
 
-		sendDisks(conn, id)
+		sendDisks(conn, id, &mu)
 		for range ticker.C {
-			sendDisks(conn, id)
+			sendDisks(conn, id, &mu)
 		}
 	}()
 
@@ -42,6 +44,8 @@ func mainLoop(conn net.Conn, id int) error {
 	ticker := time.NewTicker(1 * time.Second)
 
 	for range ticker.C {
+		mu.Lock()
+
 		newNet = models.NetworkStats{}
 
 		systems.ReadCPU(&newCpu)
@@ -80,12 +84,17 @@ func mainLoop(conn net.Conn, id int) error {
 
 		oldCpu = newCpu
 		oldNet = newNet
+
+		mu.Unlock()
 	}
 
 	return nil
 }
 
-func sendDisks(conn net.Conn, id int) {
+func sendDisks(conn net.Conn, id int, mu *sync.Mutex) {
+	mu.Lock()
+	defer mu.Unlock()
+
 	disks, err := systems.GetDisks()
 	if err != nil {
 		logger.Warn("An error has occurred while recovering data from disks")
@@ -94,7 +103,7 @@ func sendDisks(conn net.Conn, id int) {
 	for _, disk := range disks {
 		err = socket.Disk(conn, disk, id)
 		if err != nil {
-			logger.Warn(fmt.Sprintf("Une erreur s'est produite lors de l'envoi des données du disque \"%s\"", disk.Device))
+			logger.Warn(fmt.Sprintf("An error occurred while sending data from disk \"%s\"", disk.Device))
 		}
 		logger.Debug(fmt.Sprintf("The \"%s\" disk statistics have been sent", disk.Device))
 	}
