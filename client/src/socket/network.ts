@@ -4,7 +4,7 @@ import type { SocketData } from "../socket";
 import db from "../database";
 import tables from "../database/tables";
 import { Logger } from "../utils/log";
-import { getServerName } from "../utils/server";
+import { getServerName, updated } from "../utils/server";
 
 const logger = Logger.get("tcp socket");
 
@@ -30,4 +30,5 @@ export async function network(socket: Socket<SocketData>, data: Message) {
     });
 
     socket.write("true");
+    updated(data.Id);
 }

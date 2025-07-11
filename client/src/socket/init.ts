@@ -6,7 +6,7 @@ import { Logger } from "../utils/log";
 import db from "../database";
 import tables from "../database/tables";
 import { eq } from "drizzle-orm";
-import { getServerName } from "../utils/server";
+import { getServerName, updated } from "../utils/server";
 
 const logger = Logger.get("tcp socket");
 
@@ -37,4 +37,5 @@ export async function init(socket: Socket<SocketData>, data: Message) {
             name: serverName,
         });
     }
+    updated(data.Id);
 }

@@ -17,3 +17,17 @@ body {
     width: 100vw;
     height: 100vh;
 }
+
+.input {
+    outline: none;
+    border: white 1px solid;
+    border-radius: 5px;
+    padding: 10px 5px;
+
+    background: transparent;
+    color: white;
+}
+
+label {
+    font-size: 15px;
+}

@@ -5,7 +5,7 @@ import db from "../database";
 import tables from "../database/tables";
 import { and, eq, sql } from "drizzle-orm";
 import { Logger } from "../utils/log";
-import { getServerName } from "../utils/server";
+import { getServerName, updated } from "../utils/server";
 
 const logger = Logger.get("tcp socket");
 
@@ -52,4 +52,5 @@ export async function disk(socket: Socket<SocketData>, data: Message) {
         device: disk.Device,
     });
     socket.write("true");
+    updated(data.Id);
 }

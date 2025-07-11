@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import db from "../database";
 import tables from "../database/tables";
 
@@ -8,10 +8,14 @@ export async function getServerName(id: number) {
         .from(tables.servers)
         .where(eq(tables.servers.id, id))
         .limit(1);
-    
+
     if (info.length === 0) {
         return null;
     }
-    
+
     return info[0]?.name;
+}
+
+export async function updated(id: number) {
+    await db.update(tables.servers).set({ last_update: sql`(unixepoch())` });
 }

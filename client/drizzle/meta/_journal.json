@@ -92,6 +92,20 @@
       "when": 1752107389533,
       "tag": "0012_steady_king_cobra",
       "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "6",
+      "when": 1752195608653,
+      "tag": "0013_overconfident_warhawk",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "6",
+      "when": 1752195622138,
+      "tag": "0014_quick_juggernaut",
+      "breakpoints": true
     }
   ]
 }

@@ -22,25 +22,13 @@ body {
 
 #container input,
 #container button {
-    outline: none;
-    border: white 1px solid;
-
-    border-radius: 5px;
-    padding: 10px 5px;
     margin-top: 5px;
-
-    background: transparent;
-    color: white;
     width: 200px;
 }
 
 #container button {
     cursor: pointer;
     width: 213px;
-}
-
-#container label {
-    font-size: 15px;
 }
 
 #container .error {

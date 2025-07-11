@@ -3,7 +3,7 @@ import type { SocketData } from "../socket";
 import type { Message } from "../models/message";
 import db from "../database";
 import tables from "../database/tables";
-import { getServerName } from "../utils/server";
+import { getServerName, updated } from "../utils/server";
 import { Logger } from "../utils/log";
 
 const logger = Logger.get("tcp socket");
@@ -20,4 +20,5 @@ export async function cpuusage(socket: Socket<SocketData>, data: Message) {
     });
 
     socket.write("true");
+    updated(data.Id);
 }

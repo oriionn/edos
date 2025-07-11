@@ -40,6 +40,10 @@ body {
     width: 15px;
 }
 
+.server .actions .token {
+    cursor: pointer;
+}
+
 .server .actions {
     display: flex;
     flex-direction: row;
@@ -53,4 +57,64 @@ body {
 
 .server .status.online {
     fill: var(--green);
+}
+
+#modal {
+    position: fixed;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    background: var(--background);
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+#modal.visible {
+    display: flex;
+}
+
+#modal-close {
+    position: absolute;
+    z-index: 20px;
+    top: 20px;
+    right: 20px;
+
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+}
+
+#modal-content .token-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+#modal-content input {
+    width: 250px;
+    height: 25px;
+    padding: 10px;
+    cursor: not-allowed;
+}
+
+#modal-content button {
+    padding: 5px 10px;
+    height: 45px;
+    cursor: pointer;
+}
+
+#modal-content button svg {
+    width: 16px;
+    height: 16px;
+}
+
+#modal-message {
+    display: inline-block;
+    max-width: 300px;
 }

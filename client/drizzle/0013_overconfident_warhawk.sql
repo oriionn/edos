@@ -1,0 +1,1 @@
+ALTER TABLE `servers` ADD `lastUpdate` integer NOT NULL;

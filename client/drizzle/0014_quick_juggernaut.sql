@@ -1,0 +1,1 @@
+ALTER TABLE `servers` RENAME COLUMN "lastUpdate" TO "last_update";

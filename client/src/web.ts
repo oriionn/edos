@@ -8,6 +8,7 @@ import staticPlugin from "@elysiajs/static";
 import bearer from "@elysiajs/bearer";
 import authMacros from "./web/macros/auth";
 import serversRouter from "./web/routers/servers";
+import { websocket } from "./websocket";
 
 const logger = Logger.get("web server");
 
@@ -24,7 +25,9 @@ export async function web() {
         .use(staticPlugin({ assets: "src/web/public" }))
         .use(authMacros)
         .use(pages)
-        .group("/api", (a) => a.use(authRouter).use(serversRouter));
+        .group("/api", (a) => a.use(authRouter).use(serversRouter))
+        // @ts-ignore
+        .ws("/websocket", websocket);
 
     app.listen(process.env.WEB_PORT!, (web) => {
         logger.info(`Web server running on ${web.hostname}:${web.port}`);
