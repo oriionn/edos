@@ -4,9 +4,9 @@ import tables from "../../database/tables";
 import { eq } from "drizzle-orm";
 import { generateToken } from "../../utils/key";
 
-export default new Elysia()
+export default new Elysia({ prefix: "servers" })
     .get(
-        "/servers",
+        "/",
         async () => {
             const servers = await db.select().from(tables.servers);
             return {
@@ -19,7 +19,7 @@ export default new Elysia()
         { auth: true },
     )
     .get(
-        "/servers/:id/token",
+        "/:id/token",
         async ({ params: { id } }) => {
             const servers = await db
                 .select()
@@ -46,7 +46,7 @@ export default new Elysia()
         },
     )
     .post(
-        "/servers",
+        "/",
         async ({ body }) => {
             let server = await db
                 .insert(tables.servers)

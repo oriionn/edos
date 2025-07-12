@@ -36,6 +36,10 @@ label {
     color: var(--red);
 }
 
+.error.success {
+    color: var(--green);
+}
+
 #container.forms {
     padding: 10px;
     display: flex;
@@ -53,4 +57,16 @@ label {
 #container.forms button {
     cursor: pointer;
     width: 213px;
+}
+
+#return {
+    position: fixed;
+    top: 10px;
+    left: 20px;
+    cursor: pointer;
+}
+
+#return svg {
+    width: 48px;
+    height: 48px;
 }

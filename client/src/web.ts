@@ -9,6 +9,7 @@ import bearer from "@elysiajs/bearer";
 import authMacros from "./web/macros/auth";
 import serversRouter from "./web/routers/servers";
 import { websocket } from "./websocket";
+import passwordRouter from "./web/routers/password";
 
 const logger = Logger.get("web server");
 
@@ -25,7 +26,9 @@ export async function web() {
         .use(staticPlugin({ assets: "src/web/public" }))
         .use(authMacros)
         .use(pages)
-        .group("/api", (a) => a.use(authRouter).use(serversRouter))
+        .group("/api", (a) =>
+            a.use(authRouter).use(serversRouter).use(passwordRouter),
+        )
         // @ts-ignore
         .ws("/websocket", websocket);
 

@@ -1,19 +1,22 @@
 import Elysia from "elysia";
 
-async function render()
+async function render(page: string) {
+    let html = await Bun.file(`src/web/pages/${page}.html`).text();
+    return html;
+}
 
 export default new Elysia()
     .get("/login", async () => {
-        let html = await Bun.file("src/web/pages/auth.html").text();
-        return html;
+        return await render("auth");
     })
     .get("/", async () => {
-        let html = await Bun.file("src/web/pages/index.html").text();
-        return html;
+        return await render("index");
     })
     .group("/servers", (group) =>
         group.get("/new", async () => {
-            let html = await Bun.file("src/web/pages/create.html").text();
-            return html;
+            return await render("create");
         }),
-    );
+    )
+    .get("/password/new", async () => {
+        return await render("password");
+    });
