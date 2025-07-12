@@ -27,6 +27,13 @@ export const websocket: Partial<WebSocketHandler<Context>> = {
                     const token = await jwtVerify(data, encodedKey);
                     // @ts-ignore
                     auth[ws.id] = true;
+
+                    if (intervals[ws.id]) clearInterval(intervals[ws.id]);
+                    await interval(ws, auth);
+                    intervals[ws.id] = setInterval(async () => {
+                        await interval(ws, auth);
+                    }, 5000);
+
                     return ws.send({
                         type: MessageType.Login,
                         data: true,
@@ -47,12 +54,6 @@ export const websocket: Partial<WebSocketHandler<Context>> = {
                 });
                 break;
         }
-    },
-    async open(ws) {
-        await interval(ws, auth);
-        intervals[ws.id] = setInterval(async () => {
-            await interval(ws, auth);
-        }, 5000);
     },
     close(ws) {
         clearInterval(intervals[ws.id]);

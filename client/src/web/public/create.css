@@ -1,0 +1,17 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#return {
+    position: fixed;
+    top: 10px;
+    left: 20px;
+    cursor: pointer;
+}
+
+#return svg {
+    width: 48px;
+    height: 48px;
+}

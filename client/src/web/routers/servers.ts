@@ -44,4 +44,24 @@ export default new Elysia()
             params: t.Object({ id: t.Number() }),
             auth: true,
         },
+    )
+    .post(
+        "/servers",
+        async ({ body }) => {
+            let server = await db
+                .insert(tables.servers)
+                .values({
+                    name: body.name,
+                })
+                .returning();
+
+            return {
+                ok: true,
+                data: { server },
+            };
+        },
+        {
+            body: t.Object({ name: t.String() }),
+            auth: true,
+        },
     );

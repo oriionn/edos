@@ -17,5 +17,8 @@ export async function getServerName(id: number) {
 }
 
 export async function updated(id: number) {
-    await db.update(tables.servers).set({ last_update: sql`(unixepoch())` });
+    await db
+        .update(tables.servers)
+        .set({ last_update: sql`(unixepoch())` })
+        .where(eq(tables.servers.id, id));
 }

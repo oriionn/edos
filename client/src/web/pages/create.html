@@ -6,7 +6,22 @@
         <title>Edos - New server</title>
 
         <link rel="stylesheet" href="/public/style.css" />
+        <link rel="stylesheet" href="/public/create.css" />
+        <script src="/public/icons.js" defer></script>
+        <script src="/public/error.js" defer></script>
         <script src="/public/main.js" defer></script>
+        <script src="/public/create.js" defer></script>
     </head>
-    <body></body>
+    <body>
+        <div id="return">
+            <arrowleft-icon />
+        </div>
+        <div id="container" class="forms">
+            <label for="name">name</label>
+            <input type="text" id="name" class="input" />
+
+            <span class="error" id="error"></span>
+            <button id="create" class="input">create</button>
+        </div>
+    </body>
 </html>

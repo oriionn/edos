@@ -102,7 +102,27 @@ class Copy extends HTMLElement {
     }
 }
 
+class ArrowLeft extends HTMLElement {
+    constructor() {
+        super();
+        this.innerHTML = `
+            <svg viewBox="0 0 22 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 9H6V10H4V9Z" fill="white"/>
+                <path d="M3 8H6V9H3V8Z" fill="white"/>
+                <path d="M2 7H5V8H2V7Z" fill="white"/>
+                <path d="M1 6H4V7H1V6Z" fill="white"/>
+                <path d="M1 3H4V4H1V3Z" fill="white"/>
+                <path d="M2 2H5V3H2V2Z" fill="white"/>
+                <path d="M3 1H6V2H3V1Z" fill="white"/>
+                <path d="M4 0H6V1H4V0Z" fill="white"/>
+                <path d="M0 4H22V6H0V4Z" fill="white"/>
+            </svg>
+        `;
+    }
+}
+
 customElements.define("circle-icon", Circle);
 customElements.define("key-icon", Key);
 customElements.define("x-icon", X);
 customElements.define("copy-icon", Copy);
+customElements.define("arrowleft-icon", ArrowLeft);

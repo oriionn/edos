@@ -31,3 +31,26 @@ body {
 label {
     font-size: 15px;
 }
+
+.error {
+    color: var(--red);
+}
+
+#container.forms {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 220px;
+}
+
+#container.forms input,
+#container.forms button {
+    margin-top: 5px;
+    width: 200px;
+}
+
+#container.forms button {
+    cursor: pointer;
+    width: 213px;
+}

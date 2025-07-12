@@ -1,14 +1,5 @@
 const passwordInput = document.getElementById("password");
 const loginButton = document.getElementById("login");
-const errorSpan = document.getElementById("error");
-
-function showError(text) {
-    errorSpan.innerHTML = "⚠️ " + text;
-}
-
-function hideError() {
-    errorSpan.innerHTML = "";
-}
 
 loginButton.addEventListener("click", async () => {
     if (passwordInput.value.length === 0) {

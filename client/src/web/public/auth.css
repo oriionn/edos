@@ -3,34 +3,3 @@ body {
     justify-content: center;
     align-items: center;
 }
-
-#container {
-    /* background: var(--container); */
-    border-radius: 10px;
-    padding: 10px;
-
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    width: 220px;
-}
-
-#container h1 {
-    font-size: 35px;
-    margin-bottom: 10px;
-}
-
-#container input,
-#container button {
-    margin-top: 5px;
-    width: 200px;
-}
-
-#container button {
-    cursor: pointer;
-    width: 213px;
-}
-
-#container .error {
-    color: var(--red);
-}
