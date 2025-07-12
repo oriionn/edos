@@ -1,8 +1,7 @@
-class Circle extends HTMLElement {
-    constructor() {
-        super();
-
-        this.innerHTML = `
+const icons = [
+    {
+        name: "circle",
+        content: `
             <svg
                 viewBox="0 0 470 474"
                 fill="none"
@@ -13,15 +12,11 @@ class Circle extends HTMLElement {
                 <path d="M362 380V93H470V380H362Z" />
                 <path d="M379 108H92V0L379 0V108Z" />
             </svg>
-        `;
-    }
-}
-
-class Key extends HTMLElement {
-    constructor() {
-        super();
-
-        this.innerHTML = `
+        `,
+    },
+    {
+        name: "key",
+        content: `
             <svg
                 viewBox="0 0 888 888"
                 fill="none"
@@ -40,15 +35,11 @@ class Key extends HTMLElement {
                 <path d="M478 0H751V69H478V0Z" fill="white" />
                 <path d="M273 751H205V819H273V751Z" fill="white" />
             </svg>
-        `;
-    }
-}
-
-class X extends HTMLElement {
-    constructor() {
-        super();
-
-        this.innerHTML = `
+        `,
+    },
+    {
+        name: "x",
+        content: `
             <svg
                 viewBox="0 0 324 324"
                 fill="none"
@@ -68,15 +59,11 @@ class X extends HTMLElement {
                 <path d="M283 283H324V324H283V283Z" fill="white" />
                 <path d="M123 123H201V201H123V123Z" fill="white" />
             </svg>
-        `;
-    }
-}
-
-class Copy extends HTMLElement {
-    constructor() {
-        super();
-
-        this.innerHTML = `
+        `,
+    },
+    {
+        name: "copy",
+        content: `
             <svg
                 viewBox="0 0 477 476"
                 fill="none"
@@ -98,14 +85,11 @@ class Copy extends HTMLElement {
                 <path d="M44 325V281H108V325H44Z" fill="#FFFFFF" />
                 <path d="M281 44H325V108H281V44Z" fill="#FFFFFF" />
             </svg>
-        `;
-    }
-}
-
-class ArrowLeft extends HTMLElement {
-    constructor() {
-        super();
-        this.innerHTML = `
+        `,
+    },
+    {
+        name: "arrowleft",
+        content: `
             <svg viewBox="0 0 22 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M4 9H6V10H4V9Z" fill="white"/>
                 <path d="M3 8H6V9H3V8Z" fill="white"/>
@@ -117,12 +101,17 @@ class ArrowLeft extends HTMLElement {
                 <path d="M4 0H6V1H4V0Z" fill="white"/>
                 <path d="M0 4H22V6H0V4Z" fill="white"/>
             </svg>
-        `;
-    }
-}
+        `,
+    },
+];
 
-customElements.define("circle-icon", Circle);
-customElements.define("key-icon", Key);
-customElements.define("x-icon", X);
-customElements.define("copy-icon", Copy);
-customElements.define("arrowleft-icon", ArrowLeft);
+icons.forEach((icon) => {
+    class Icon extends HTMLElement {
+        constructor() {
+            super();
+            this.innerHTML = icon.content;
+        }
+    }
+
+    customElements.define(`${icon.name}-icon`, Icon);
+});
