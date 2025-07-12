@@ -35,7 +35,7 @@ body {
     border-bottom: 1px solid var(--text);
 }
 
-.server .actions > * {
+.server .actions svg {
     height: 15px;
     width: 15px;
 }
@@ -51,11 +51,14 @@ body {
 }
 
 .server .status {
-    fill: var(--red);
     margin-right: 2px;
 }
 
-.server .status.online {
+.server .status svg {
+    fill: var(--red);
+}
+
+.server .status.online svg {
     fill: var(--green);
 }
 

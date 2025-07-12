@@ -49,9 +49,9 @@ export const websocket: Partial<WebSocketHandler<Context>> = {
         }
     },
     async open(ws) {
-        await interval(ws);
+        await interval(ws, auth);
         intervals[ws.id] = setInterval(async () => {
-            await interval(ws);
+            await interval(ws, auth);
         }, 5000);
     },
     close(ws) {

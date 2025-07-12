@@ -4,7 +4,10 @@ import tables from "../database/tables";
 import { MessageType } from "../models/websocket";
 import type { ServerWebSocket } from "elysia/ws/bun";
 
-export async function interval(ws: ServerWebSocket) {
+export async function interval(
+    ws: ServerWebSocket,
+    auth: Record<string, boolean>,
+) {
     let servers = await db.select().from(tables.servers);
 
     let unixepoch = Math.floor(Date.now() / 1000);
