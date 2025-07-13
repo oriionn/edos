@@ -10,6 +10,8 @@ import authMacros from "./web/macros/auth";
 import serversRouter from "./web/routers/servers";
 import { websocket } from "./websocket";
 import passwordRouter from "./web/routers/password";
+import { minify } from "terser";
+import { join } from "path";
 
 const logger = Logger.get("web server");
 
@@ -30,7 +32,14 @@ export async function web() {
             a.use(authRouter).use(serversRouter).use(passwordRouter),
         )
         // @ts-ignore
-        .ws("/websocket", websocket);
+        .ws("/websocket", websocket)
+        .onBeforeHandle(async ({ path, set }) => {
+            if (path.endsWith(".js")) {
+                let content = Bun.file(join(__dirname, "web", path));
+                set.headers["content-type"] = "text/javascript";
+                return (await minify(await content.text())).code;
+            }
+        });
 
     app.listen(process.env.WEB_PORT!, (web) => {
         logger.info(`Web server running on ${web.hostname}:${web.port}`);

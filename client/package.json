@@ -25,6 +25,7 @@
         "@logtape/pretty": "^1.0.4",
         "drizzle-orm": "^0.44.2",
         "elysia": "^1.3.5",
-        "jose": "^6.0.11"
+        "jose": "^6.0.11",
+        "terser": "^5.43.1"
     }
 }
