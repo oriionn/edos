@@ -46,10 +46,14 @@ ws.onmessage = (message) => {
         let data = JSON.parse(message.data);
         switch (data.type) {
             case MessageType.Login:
-                if (!data.data) {
-                    window.location.href = "/login";
-                    return;
-                }
+                fetch("/api/websocket/login", {
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data.data),
+                });
                 break;
             case MessageType.Availability:
                 let [id, rawAvailability] = data.data.split("_");

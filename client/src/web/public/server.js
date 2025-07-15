@@ -1,4 +1,8 @@
-const chart = document.getElementById("chart");
+const returnButton = document.getElementById("return");
+
+returnButton.addEventListener("click", () => {
+    window.location.href = "/";
+});
 
 // Constants
 const LETTER_RATIO = 8.5;

@@ -8,8 +8,9 @@ import staticPlugin from "@elysiajs/static";
 import bearer from "@elysiajs/bearer";
 import authMacros from "./web/macros/auth";
 import serversRouter from "./web/routers/servers";
-import { websocket } from "./websocket";
+import { websocket } from "./websocket/servers";
 import passwordRouter from "./web/routers/password";
+import websocketRouter from "./web/routers/websocket";
 import { minify } from "terser";
 import { join } from "path";
 
@@ -29,7 +30,11 @@ export async function web() {
         .use(authMacros)
         .use(pages)
         .group("/api", (a) =>
-            a.use(authRouter).use(serversRouter).use(passwordRouter),
+            a
+                .use(authRouter)
+                .use(serversRouter)
+                .use(passwordRouter)
+                .use(websocketRouter),
         )
         // @ts-ignore
         .ws("/websocket", websocket)

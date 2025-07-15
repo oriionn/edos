@@ -5,3 +5,4 @@ export * from "./tables/uptime";
 export * from "./tables/network";
 export * from "./tables/memory";
 export * from "./tables/password";
+export * from "./tables/websocket";
