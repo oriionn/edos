@@ -44,13 +44,12 @@ label {
     padding: 10px;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 10px;
     width: 220px;
 }
 
 #container.forms input,
 #container.forms button {
-    margin-top: 5px;
     width: 200px;
 }
 

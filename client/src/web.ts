@@ -34,11 +34,17 @@ export async function web() {
         // @ts-ignore
         .ws("/websocket", websocket)
         .onBeforeHandle(async ({ path, set }) => {
-            if (path.endsWith(".js")) {
+            if (path.endsWith(".js") && !path.endsWith("asciichart.js")) {
                 let content = Bun.file(join(__dirname, "web", path));
                 set.headers["content-type"] = "text/javascript";
                 return (await minify(await content.text())).code;
             }
+        })
+        .get("/public/asciichart.js", async ({ set }) => {
+            set.headers["content-type"] = "text/javascript";
+            let content = Bun.file("node_modules/asciichart/asciichart.js");
+            let minified = await minify(await content.text());
+            return minified.code;
         });
 
     app.listen(process.env.WEB_PORT!, (web) => {

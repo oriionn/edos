@@ -23,6 +23,7 @@
         "@logtape/file": "^1.0.4",
         "@logtape/logtape": "^1.0.4",
         "@logtape/pretty": "^1.0.4",
+        "asciichart": "^1.5.25",
         "drizzle-orm": "^0.44.2",
         "elysia": "^1.3.5",
         "jose": "^6.0.11",

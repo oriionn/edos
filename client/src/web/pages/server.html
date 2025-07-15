@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Edos - {name}</title>
+
+        <link rel="stylesheet" href="/public/style.css" />
+        <link rel="stylesheet" href="/public/server.css" />
+        <script src="/public/asciichart.js" defer></script>
+        <script src="/public/main.js" defer></script>
+        <script src="/public/icons.js" defer></script>
+        <script src="/public/server.js" defer></script>
+    </head>
+    <body>
+        <div id="stats">
+            <div id="return">
+                <arrowleft-icon />
+            </div>
+            <div class="container">
+                <div class="container-header">
+                    <div>
+                        <h2>CPU</h2>
+                        <span class="sub"
+                            >AMD Ryzen 3 2200G with Radeon Vega Graphics</span
+                        >
+                    </div>
+                    <span>54%</span>
+                </div>
+                <pre class="chart" id="chart_cpu"></pre>
+            </div>
+            <div class="container">
+                <div class="container-header">
+                    <div>
+                        <h2>Memory</h2>
+                        <span class="sub">12 GiB / 16 GiB</span>
+                    </div>
+                    <span>25%</span>
+                </div>
+                <pre class="chart" id="chart_memory"></pre>
+            </div>
+            <div class="container">
+                <div class="container-header">
+                    <h2 class="not-sub">Upload</h2>
+                    <span>25 MiB</span>
+                </div>
+                <pre class="chart" id="chart_upload"></pre>
+            </div>
+            <div class="container">
+                <div class="container-header">
+                    <h2 class="not-sub">Download</h2>
+                    <span>25 MiB</span>
+                </div>
+                <pre class="chart" id="chart_download"></pre>
+            </div>
+            <div class="container">
+                <div class="container-header">
+                    <h2 class="not-sub">Disks</h2>
+                </div>
+                <table class="disks">
+                    <tbody>
+                        <tr>
+                            <td>Main</td>
+                            <td class="usage">50% (500 GiB / 1 TiB)</td>
+                        </tr>
+                        <tr>
+                            <td>SEAGATE</td>
+                            <td class="usage">50% (1 TiB / 2 TiB)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

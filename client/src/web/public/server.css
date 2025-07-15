@@ -1,0 +1,95 @@
+#stats {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+
+.container {
+    border: white 1px solid;
+    border-radius: 10px;
+
+    padding: 10px;
+    width: 20vw;
+    height: 240px;
+}
+
+.container.wrapped {
+    margin-left: 77px;
+}
+
+.container-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.container-header {
+    font-size: 20px;
+}
+
+.chart {
+    margin-top: 10px;
+}
+
+.sub {
+    font-size: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    display: block;
+}
+
+.container-header div {
+    min-width: 0;
+    width: 100%;
+}
+
+.container-header h2:not(.not-sub) {
+    margin-bottom: -5px;
+}
+
+.container-header h2.not-sub {
+    margin-bottom: 10px;
+}
+
+.container:has(table) .container-header h2 {
+    margin-bottom: 0;
+}
+
+#return {
+    position: initial !important;
+    margin-right: 10px;
+}
+
+.disks {
+    width: 100%;
+}
+
+.disks td.usage {
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media screen and (max-width: 1200px) {
+    .container {
+        width: 270px;
+        height: 270px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #stats {
+        flex-direction: column;
+    }
+
+    .container.wrapped {
+        margin-left: 0;
+    }
+
+    .container {
+        width: calc(100% - 20px);
+    }
+}
