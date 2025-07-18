@@ -1,5 +1,4 @@
 NAME=edos-server
-
 GOC=go build
 
 SRC=main.go loop.go

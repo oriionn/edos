@@ -6,6 +6,25 @@
     padding: 20px;
 }
 
+#stats.no-data {
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+#stats.no-data .container {
+    display: none;
+}
+
+#stats:not(.no-data) #no-data-text {
+    display: none;
+}
+
+#no-data-text {
+    font-size: 25px;
+}
+
 .container {
     border: white 1px solid;
     border-radius: 10px;
@@ -47,10 +66,6 @@
     width: 100%;
 }
 
-.container-header h2:not(.not-sub) {
-    margin-bottom: -5px;
-}
-
 .container-header h2.not-sub {
     margin-bottom: 10px;
 }
@@ -59,7 +74,7 @@
     margin-bottom: 0;
 }
 
-#return {
+#stats:not(.no-data) #return {
     position: initial !important;
     margin-right: 10px;
 }

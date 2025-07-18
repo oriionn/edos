@@ -7,6 +7,8 @@ export enum MainMessageType {
 export enum ServerMessageType {
     Login,
     Unknown,
+    SecInterval,
+    MinInterval,
 }
 
 export enum WebsocketType {

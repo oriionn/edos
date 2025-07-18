@@ -7,7 +7,10 @@
 
         <link rel="stylesheet" href="/public/style.css" />
         <link rel="stylesheet" href="/public/server.css" />
-        <script src="/public/asciichart.js" defer></script>
+        <script>
+            const id = { id };
+        </script>
+        <script src="/public/asciichart.js"></script>
         <script src="/public/main.js" defer></script>
         <script src="/public/icons.js" defer></script>
         <script src="/public/server.js" defer></script>
@@ -21,11 +24,11 @@
                 <div class="container-header">
                     <div>
                         <h2>CPU</h2>
-                        <span class="sub"
+                        <span class="sub" id="cpu_name"
                             >AMD Ryzen 3 2200G with Radeon Vega Graphics</span
                         >
                     </div>
-                    <span>54%</span>
+                    <span id="current_cpu">54%</span>
                 </div>
                 <pre class="chart" id="chart_cpu"></pre>
             </div>
@@ -33,23 +36,35 @@
                 <div class="container-header">
                     <div>
                         <h2>Memory</h2>
-                        <span class="sub">12 GiB / 16 GiB</span>
+                        <span class="sub" id="memory_ratio"
+                            >12 GiB / 16 GiB</span
+                        >
                     </div>
-                    <span>25%</span>
+                    <span id="current_memory">25%</span>
                 </div>
                 <pre class="chart" id="chart_memory"></pre>
+            </div>
+            <div class="container" id="swap_container">
+                <div class="container-header">
+                    <div>
+                        <h2>Swap</h2>
+                        <span class="sub" id="swap_ratio">12 GiB / 16 GiB</span>
+                    </div>
+                    <span id="current_swap">25%</span>
+                </div>
+                <pre class="chart" id="chart_swap"></pre>
             </div>
             <div class="container">
                 <div class="container-header">
                     <h2 class="not-sub">Upload</h2>
-                    <span>25 MiB</span>
+                    <span id="current_upload">25 MiB</span>
                 </div>
                 <pre class="chart" id="chart_upload"></pre>
             </div>
             <div class="container">
                 <div class="container-header">
                     <h2 class="not-sub">Download</h2>
-                    <span>25 MiB</span>
+                    <span id="current_download">25 MiB</span>
                 </div>
                 <pre class="chart" id="chart_download"></pre>
             </div>
@@ -58,7 +73,7 @@
                     <h2 class="not-sub">Disks</h2>
                 </div>
                 <table class="disks">
-                    <tbody>
+                    <tbody id="disks">
                         <tr>
                             <td>Main</td>
                             <td class="usage">50% (500 GiB / 1 TiB)</td>
@@ -70,6 +85,7 @@
                     </tbody>
                 </table>
             </div>
+            <span id="no-data-text">No data available</span>
         </div>
     </body>
 </html>

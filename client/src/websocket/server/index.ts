@@ -1,8 +1,18 @@
 import { t, type Context } from "elysia";
 import type { WebSocketHandler } from "elysia/ws/bun";
-import { ServerMessageType as MessageType } from "../../models/websocket";
+import {
+    ServerMessageType as MessageType,
+    WebsocketType,
+} from "../../models/websocket";
+import db from "../../database";
+import tables from "../../database/tables";
+import { interval_sec } from "./interval";
+import { eq } from "drizzle-orm";
+
+const intervals: Record<string, NodeJS.Timeout> = {};
 
 export const websocket: Partial<WebSocketHandler<Context>> = {
+    // @ts-ignore
     body: t.Object({
         type: t.Enum(MessageType),
         data: t.String(),
@@ -10,7 +20,32 @@ export const websocket: Partial<WebSocketHandler<Context>> = {
     params: t.Object({
         id: t.Number(),
     }),
-    async message(ws, { type, data }) {
-        let id = ws.data.params.id;
+    async close(ws) {
+        // @ts-ignore
+        clearInterval(intervals[ws.id]);
+
+        await db
+            .delete(tables.websockets)
+            // @ts-ignore
+            .where(eq(tables.websockets.id, ws.id));
+    },
+    async open(ws) {
+        ws.send({
+            // @ts-ignore
+            type: MessageType.Login,
+            data: {
+                // @ts-ignore
+                id: ws.id,
+                type: WebsocketType.SERVER,
+            },
+        });
+
+        // @ts-ignore
+        await interval_sec(ws);
+        // @ts-ignore
+        intervals[ws.id] = setInterval(async () => {
+            // @ts-ignore
+            await interval_sec(ws);
+        }, 1000);
     },
 };

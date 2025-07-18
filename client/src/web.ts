@@ -3,12 +3,13 @@ import { Logger } from "./utils/log";
 import jwt from "@elysiajs/jwt";
 import { html } from "@elysiajs/html";
 import authRouter from "./web/routers/auth";
-import pages from "./web/routers/pages";
+import pages, { render } from "./web/routers/pages";
 import staticPlugin from "@elysiajs/static";
 import bearer from "@elysiajs/bearer";
 import authMacros from "./web/macros/auth";
 import serversRouter from "./web/routers/servers";
 import { websocket } from "./websocket/servers";
+import { websocket as serverWebsocket } from "./websocket/server";
 import passwordRouter from "./web/routers/password";
 import websocketRouter from "./web/routers/websocket";
 import { minify } from "terser";
@@ -38,6 +39,8 @@ export async function web() {
         )
         // @ts-ignore
         .ws("/websocket", websocket)
+        // @ts-ignore
+        .ws("/websocket/:id", serverWebsocket)
         .onBeforeHandle(async ({ path, set }) => {
             if (path.endsWith(".js") && !path.endsWith("asciichart.js")) {
                 let content = Bun.file(join(__dirname, "web", path));
@@ -50,6 +53,14 @@ export async function web() {
             let content = Bun.file("node_modules/asciichart/asciichart.js");
             let minified = await minify(await content.text());
             return minified.code;
+        })
+        .onError(async ({ code }) => {
+            if (code === "NOT_FOUND") {
+                let response = new Response(await render("not_found"));
+                response.headers.set("Content-Type", "text/html");
+
+                return response;
+            }
         });
 
     app.listen(process.env.WEB_PORT!, (web) => {

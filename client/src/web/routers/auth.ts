@@ -9,7 +9,11 @@ export default new Elysia({ prefix: "/auth" })
         async ({ body, status, jwt }) => {
             let password = (await db.select().from(tables.password))[0]
                 ?.password;
-            if (await Bun.password.verify(body.password, password!)) {
+
+            if (
+                (await Bun.password.verify(body.password, password!)) ||
+                process.env.DEMO!
+            ) {
                 const token = await jwt.sign({ auth: true });
 
                 return {

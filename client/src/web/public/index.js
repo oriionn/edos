@@ -99,6 +99,7 @@ async function load() {
     );
 
     data = await res.json();
+    let unixepoch = Math.floor(Date.now() / 1000);
 
     data.data.servers.forEach((server) => {
         servers.innerHTML =
@@ -109,8 +110,13 @@ async function load() {
                     <key-icon />
                 </div>
 
-                <circle-icon class="status" data-id="${server.id}" />
+                <circle-icon class="status ${server.last_update >= unixepoch - 10 ? "online" : ""}" data-id="${server.id}" />
             </div>
         </div>` + servers.innerHTML;
     });
+}
+
+async function logout() {
+    localStorage.removeItem("token");
+    window.location.href = "/login";
 }

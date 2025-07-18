@@ -121,3 +121,8 @@ body {
     display: inline-block;
     max-width: 300px;
 }
+
+.demo #change-password,
+.demo #add-server {
+    display: none;
+}

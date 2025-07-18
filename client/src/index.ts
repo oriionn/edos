@@ -16,7 +16,7 @@ if (passwords.length === 0) {
     logger.warn(`Default password : {password}`, { password: "admin" });
 } else {
     let password = passwords[0]?.password;
-    if (await Bun.password.verify("admin", password!)) {
+    if ((await Bun.password.verify("admin", password!)) && !process.env.DEMO!) {
         logger.warn`Default password detected, please change it`;
         logger.warn(`Default password : {password}`, { password: "admin" });
     }

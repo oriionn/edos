@@ -11,13 +11,16 @@
         <script src="/public/main.js" defer></script>
         <script src="/public/index.js" defer></script>
     </head>
-    <body>
+    <body class="{demo}">
         <div id="servers">
-            <div class="server">
+            <div class="server" id="add-server">
                 <a href="/servers/new">add a server</a>
             </div>
-            <div class="server">
+            <div class="server" id="change-password">
                 <a href="/password/new">change your password</a>
+            </div>
+            <div class="server">
+                <a href="javascript:logout()">logout</a>
             </div>
         </div>
 

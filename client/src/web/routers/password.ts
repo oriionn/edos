@@ -4,7 +4,9 @@ import tables from "../../database/tables";
 
 export default new Elysia({ prefix: "password" }).put(
     "/",
-    async ({ body }) => {
+    async ({ body, status }) => {
+        if (process.env.DEMO!) return status(403, { ok: false });
+
         let hashed = await Bun.password.hash(body.password);
         await db.update(tables.password).set({
             password: hashed,
