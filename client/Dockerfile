@@ -12,6 +12,8 @@ COPY tsconfig.json .
 # COPY public public
 
 ENV NODE_ENV production
+ENV SOCKET_PORT=8000
+ENV WEB_PORT=8010
 CMD ["bun", "src/index.ts"]
 
 EXPOSE 8000

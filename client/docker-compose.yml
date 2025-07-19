@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+    backup:
+        image: edos/client
+        ports:
+            - "8000:8000"
+            - "8010:8010"
+        environment:
+            - DATABASE=client.sqlite
+            - KEY=
+            - JWT_SECRET=
+        restart: unless-stopped
