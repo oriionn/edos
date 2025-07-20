@@ -10,7 +10,7 @@ returnButton.addEventListener("click", () => {
 });
 
 // Constants
-const LETTER_RATIO = 9.5;
+const LETTER_RATIO = 12;
 const PADDING = "    ";
 const CHART_HEIGHT = 10;
 const MessageType = {
@@ -56,7 +56,7 @@ function datasetSliceLength(name, isPercentage = false) {
 
     return isPercentage
         ? -((element.parentElement.clientWidth - 20) / LETTER_RATIO)
-        : -((element.parentElement.clientWidth - 50) / LETTER_RATIO);
+        : -((element.parentElement.clientWidth - 80) / LETTER_RATIO);
 }
 
 // Chart refresh
