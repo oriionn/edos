@@ -19,20 +19,6 @@ const MessageType = {
     MinInterval: 3,
 };
 
-// Testing function
-function getRandomInt(min, max, quantity = 1) {
-    return Array.from(
-        { length: quantity },
-        () => Math.floor(Math.random() * (max - min + 1)) + min,
-    );
-}
-
-function getRandomFloat(min, max, decimals = 2, quantity = 1) {
-    return Array.from({ length: quantity }, () =>
-        Number((Math.random() * (max - min) + min).toFixed(decimals)),
-    );
-}
-
 // Detect new lines from flex wrap
 function detectWrap(className) {
     const wrapped = [];
@@ -69,7 +55,7 @@ function datasetSliceLength(name, isPercentage = false) {
     let element = document.getElementById(`chart_${name}`);
 
     return isPercentage
-        ? -((element.parentElement.clientWidth - 20) / LETTER_RATIO)
+        ? -((element.parentElement.clientWidth - 35) / LETTER_RATIO)
         : -((element.parentElement.clientWidth - 50) / LETTER_RATIO);
 }
 
