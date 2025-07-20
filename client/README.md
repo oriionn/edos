@@ -39,7 +39,7 @@ cd edos/client # Go to the client folder
 docker build -t edos/client . # Build Docker image
 ```
 
-2. Change env variables in `docker-compose.yml`
+2. Change env variables and paths in `docker-compose.yml`
 
 3. Up the docker compose
 ```sh

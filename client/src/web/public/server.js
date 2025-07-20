@@ -173,19 +173,24 @@ function refreshCurrent(type, data, bytes = false) {
 
 function refreshDisks(disks) {
     disksTable.innerHTML = "";
-    disks.forEach((disk) => {
-        if (disk.name === disk.device) return;
+    disks
+        .sort()
+        .reverse()
+        .forEach((disk) => {
+            if (disk.name === disk.device) return;
 
-        let percentage = ((disk.free_size / disk.total_size) * 100).toFixed(2);
-        let formatted_free = bytesToBibytes(disk.free_size);
-        let formatted_total = bytesToBibytes(disk.total_size);
+            let percentage = ((disk.free_size / disk.total_size) * 100).toFixed(
+                2,
+            );
+            let formatted_free = bytesToBibytes(disk.free_size);
+            let formatted_total = bytesToBibytes(disk.total_size);
 
-        let formatted = `${formatted_free.formattedValue} ${formatted_free.prefix} / ${formatted_total.formattedValue} ${formatted_total.prefix}`;
-        disksTable.innerHTML += `<tr>
+            let formatted = `${formatted_free.formattedValue} ${formatted_free.prefix} / ${formatted_total.formattedValue} ${formatted_total.prefix}`;
+            disksTable.innerHTML += `<tr>
             <td>${disk.name}</td>
             <td class="usage">${percentage}% (${formatted})</td>
         </tr>`;
-    });
+        });
 }
 
 const ws = new WebSocket("/websocket/" + id);
