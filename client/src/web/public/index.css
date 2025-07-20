@@ -124,6 +124,7 @@ body {
 }
 
 .demo #change-password,
-.demo #add-server {
+.demo #add-server,
+.demo .delete {
     display: none;
 }

@@ -106,6 +106,8 @@ export default new Elysia({ prefix: "servers" })
     .delete(
         "/:id",
         async ({ params: { id } }) => {
+            if (process.env.DEMO!) return status(403, { ok: false });
+
             const servers = await db
                 .select()
                 .from(tables.servers)
