@@ -40,7 +40,8 @@ body {
     width: 15px;
 }
 
-.server .actions .token {
+.server .actions .token,
+.server .actions .delete {
     cursor: pointer;
 }
 

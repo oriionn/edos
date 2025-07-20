@@ -103,6 +103,18 @@ const icons = [
             </svg>
         `,
     },
+    {
+        name: "trash",
+        content: `
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 20H20V24H4V20Z" fill="white"/>
+                <path d="M4 0H20V4H4V0Z" fill="white"/>
+                <path d="M0 4H24V8H0V4Z" fill="white"/>
+                <path d="M4 20V4H8V20H4Z" fill="white"/>
+                <path d="M16 20V4H20V20H16Z" fill="white"/>
+            </svg>
+        `,
+    },
 ];
 
 icons.forEach((icon) => {

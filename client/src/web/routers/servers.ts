@@ -102,4 +102,43 @@ export default new Elysia({ prefix: "servers" })
             auth: true,
             params: t.Object({ id: t.Number() }),
         },
+    )
+    .delete(
+        "/:id",
+        async ({ params: { id } }) => {
+            const servers = await db
+                .select()
+                .from(tables.servers)
+                .where(eq(tables.servers.id, id));
+
+            if (servers.length === 0)
+                return status(404, {
+                    ok: false,
+                    code: "SERVER_NOT_FOUND",
+                });
+
+            await db.delete(tables.servers).where(eq(tables.servers.id, id));
+            await db
+                .delete(tables.cpu_names)
+                .where(eq(tables.cpu_names.server_id, id));
+            await db
+                .delete(tables.cpu_usage)
+                .where(eq(tables.cpu_usage.server_id, id));
+            await db.delete(tables.disks).where(eq(tables.disks.server_id, id));
+            await db
+                .delete(tables.memory)
+                .where(eq(tables.memory.server_id, id));
+            await db
+                .delete(tables.network)
+                .where(eq(tables.network.server_id, id));
+            await db
+                .delete(tables.uptime)
+                .where(eq(tables.uptime?.server_id, id));
+
+            return { ok: true };
+        },
+        {
+            auth: true,
+            params: t.Object({ id: t.Number() }),
+        },
     );

@@ -39,6 +39,18 @@ async function token(id) {
     modal.classList.add("visible");
 }
 
+async function deleteServer(id) {
+    let res = await fetch(`/api/servers/${id}`, {
+        method: "delete",
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+    });
+
+    if (!res.ok);
+    document.querySelector(`.server[data-id="${id}"]`).remove();
+}
+
 const ws = new WebSocket("/websocket");
 ws.onopen = load;
 ws.onmessage = (message) => {
@@ -103,11 +115,15 @@ async function load() {
 
     data.data.servers.forEach((server) => {
         servers.innerHTML =
-            `<div class="server">
+            `<div class="server" data-id="${server.id}">
             <a href="/servers/${server.id}">${server.name}</a>
             <div class="actions">
                 <div class="token" onclick="token(${server.id})">
                     <key-icon />
+                </div>
+
+                <div class="delete" onclick="deleteServer(${server.id})">
+                    <trash-icon />
                 </div>
 
                 <circle-icon class="status ${server.last_update >= unixepoch - 10 ? "online" : ""}" data-id="${server.id}" />
