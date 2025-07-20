@@ -86,7 +86,7 @@
 }
 
 .disks {
-    height: 240px;
+    max-height: 220px;
 }
 
 .disks tbody {
