@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-    backup:
+    client:
         image: edos/client
         ports:
             - "8000:8000"
