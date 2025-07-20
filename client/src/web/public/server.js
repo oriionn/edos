@@ -10,7 +10,7 @@ returnButton.addEventListener("click", () => {
 });
 
 // Constants
-const LETTER_RATIO = 8;
+const LETTER_RATIO = 9.5;
 const PADDING = "    ";
 const CHART_HEIGHT = 10;
 const MessageType = {
