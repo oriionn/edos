@@ -81,6 +81,17 @@
 
 .disks {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.disks {
+    height: 240px;
+}
+
+.disks tbody {
+    display: block;
+    overflow-y: auto;
 }
 
 .disks td.usage {
