@@ -1,5 +1,5 @@
 # Edos Server
-Le serveur permet de récupérer toutes les informations de votre serveur et de le renvoyer au client via un socket TCP.
+The server retrieves all information from your server and sends it back to the client via a TCP socket.
 
 ## Installation
 ### Prerequisites
