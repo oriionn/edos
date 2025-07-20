@@ -27,19 +27,21 @@ mkdir -p /etc/edos
 sudo touch /etc/edos/config
 ```
 
-4. Edit the config file
+4. Retrieve the token from the client interface: to do this, click on the small key in your client's panel.
+
+5. Edit the config file
 ```
 TOKEN=YOUR_TOKEN
 HOST=CLIENT_HOST
 PORT=CLIENT_PORT
 ```
 
-4. Create a service
+6. Create a service
 ```sh
 sudo touch /etc/systemd/system/edos.service
 ```
 
-5. Edit the service
+7. Edit the service
 ```
 [Unit]
 Description=Edos Server
@@ -57,7 +59,7 @@ RestartSec=3
 WantedBy=multi-user.target
 ```
 
-6. Start Edos
+8. Start Edos
 ```sh
 sudo systemctl daemon-reload
 sudo systemctl restart edos.service
