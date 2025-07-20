@@ -43,15 +43,15 @@ sudo touch /etc/systemd/system/edos.service
 
 7. Edit the service
 ```
+[sudo] password for nas:
 [Unit]
 Description=Edos Server
 After=network.target
 
 [Service]
 Type=simple
-User=emilien
 EnvironmentFile=/etc/edos/config
-ExecStart=/usr/local/bin/edos-server -token "${EDOS_TOKEN}" -host "${HOST}" -port "${PORT}"
+ExecStart=/usr/local/bin/edos-server -token ${TOKEN} -host ${HOST} -port ${PORT}
 Restart=always
 RestartSec=3
 
